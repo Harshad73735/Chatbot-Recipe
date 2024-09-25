@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Chatbot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <div class="chat-container">
+        <div class="chat-box" id="chat-box"></div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Search your receipe..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+    
+        function appendMessage(message, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
+    
+            const messageText = document.createElement('p');
+            messageText.textContent = message;
+    
+            messageDiv.appendChild(messageText);
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    
+        function sendMessage() {
+            const message = userInput.value.trim().toLowerCase();
+            if (message) {
+                appendMessage(userInput.value, 'user');
+                userInput.value = '';
+                setTimeout(() => botResponse(message), 1000);
+            }
+        }
+    
+        function botResponse(userMessage) {
+            fetch(`http://127.0.0.1:5000/recipe?name=${encodeURIComponent(userMessage)}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.instructions) {
+                    appendMessage(data.instructions, 'bot');
+                } else {
+                    appendMessage(data.error, 'bot');
+                }
+            })
+            .catch(error => {
+                appendMessage("Sorry, something went wrong. Please try again.", 'bot');
+            });
+        }
+    
+        // Add the Enter key handler here
+        userInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

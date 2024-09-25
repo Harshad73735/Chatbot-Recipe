@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+  background-image: url("rob.avif");
+  background-size: cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+}
+
+.chat-container {
+    width: 470px;
+    height: 642px;
+    border: 1px solid #ddd;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+   
+}
+
+.chat-box {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    border-bottom: 1px solid #ddd;
+    background-image: url("https://assets-global.website-files.com/636d05d634d44a6b9954e354/63c67e91dcb5964966b31876_Recipe%20Creation%20ChatGPT%20AI%20home%20professional%20cooks.webp");
+    opacity: 0.7;
+    background-size: cover;
+}
+
+.message {
+    margin-bottom: 15px;
+}
+
+.user-message {
+    text-align: right;
+}
+
+.bot-message {
+    text-align: left;
+}
+
+.message p {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 70%;
+}
+
+.user-message p {
+    background-color: #007bff;
+    color: white;
+}
+
+.bot-message p {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.input-container {
+    display: flex;
+    border-top: 1px solid #ddd;
+}
+
+.input-container input {
+    flex-grow: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 0;
+    outline: none;
+}
+
+.input-container button {
+    padding: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.input-container button:hover {
+    background-color: #0056b3;
+}
